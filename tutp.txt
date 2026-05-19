@@ -1,0 +1,203 @@
+============================================================
+HISTORIQUE D'INITIALISATION DU PROJET INTONATION
+============================================================
+
+Repo source : https://github.com/katiayeh/intonation.git
+Date : 17 mai 2026
+
+============================================================
+1. CLONAGE DU REPO GITHUB
+============================================================
+
+$ git clone https://github.com/katiayeh/intonation.git .
+
+Le repo contenait uniquement un README.md décrivant le projet :
+- Application pour comprendre l'intonation (tempérée, pythagoricienne)
+- Fonctionnalités prévues : gammes, intervalles, battements, analyse MuseScore
+
+============================================================
+2. CHOIX DE LA STACK
+============================================================
+
+Stack choisie : React + TypeScript + Web Audio API
+
+Raisons :
+- Web Audio API : oscillateurs à fréquence exacte, pas de dépendance externe
+- React + TypeScript : UI interactive type-safe
+- Recharts : graphiques des harmoniques
+- Vite : bundler rapide
+- Parsing MuseScore (.mscz/.mscx = XML) : DOMParser natif du navigateur
+
+============================================================
+3. INSTALLATION DE BUN (runtime + gestionnaire de paquets)
+============================================================
+
+Node.js n'était pas installé sur la machine. Installation de Bun :
+
+$ curl -fsSL https://bun.sh/install | bash
+$ source ~/.bash_profile
+$ bun --version
+1.3.14
+
+============================================================
+4. SCAFFOLDING VITE + REACT + TYPESCRIPT
+============================================================
+
+$ bun create vite tmp-init --template react-ts
+$ cp -r tmp-init/* tmp-init/.* .
+$ rm -rf tmp-init
+
+============================================================
+5. INSTALLATION DES DÉPENDANCES
+============================================================
+
+$ bun install
+  -> react, react-dom, typescript, vite, eslint, etc.
+
+$ bun add recharts
+  -> recharts@3.8.1 (graphiques)
+
+============================================================
+6. CRÉATION DE LA STRUCTURE DES DOSSIERS
+============================================================
+
+$ mkdir -p src/audio src/theory src/components src/parsers
+
+src/theory/    -> Logique musicale (fréquences, gammes, intervalles)
+src/audio/     -> Web Audio API (playback, métronome)
+src/components/-> Composants React (Scales, Intervals, Comparison)
+src/parsers/   -> (réservé pour l'import MuseScore)
+
+============================================================
+7. MODULE THEORY
+============================================================
+
+Fichier : src/theory/constants.ts
+- NOTE_NAMES : ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+- Types : NoteName, IntonationSystem ('tempered' | 'pythagorean'), ScaleNote, Interval
+- A4_FREQUENCY = 440 Hz
+- PYTHAGOREAN_RATIOS : ratios pour chaque demi-ton (0 à 11)
+- TEMPERED_SEMITONE_RATIO = 2^(1/12)
+
+Fichier : src/theory/index.ts
+- midiToFrequency(midi) : conversion MIDI -> Hz
+- noteToMidi(name, octave) : conversion note -> numéro MIDI
+- getFrequency(name, octave, system, rootName, rootOctave) : fréquence d'une note
+  - Tempéré : A4 * 2^((midi-69)/12)
+  - Pythagoricien : fréquence racine * ratio pythagoricien * 2^(décalage octave)
+- getScale(rootName, rootOctave, system, semitonePattern) : génère une gamme
+- getBeatFrequency(freq1, freq2) : |freq1 - freq2|
+- getBeatsPerSecond(freq1, freq2) : battements par seconde
+- getBeatPeriod(freq1, freq2) : période des battements
+- getHarmonics(frequency, count=8) : harmoniques d'une fréquence
+- INTERVAL_NAMES : noms des intervalles (0=Unisson, 7=Quinte juste, etc.)
+
+============================================================
+8. MODULE AUDIO
+============================================================
+
+Fichier : src/audio/index.ts
+- getAudioContext() : singleton AudioContext
+- playFrequency(frequency, duration, type) : joue une note (sine par défaut)
+  - Oscillateur -> GainNode (envelope : 0.3 -> 0.001) -> Destination
+- playTwoFrequencies(freq1, freq2, duration, type) : joue 2 notes simultanément
+- playScale(frequencies[], noteDuration, type) : joue une gamme note par note
+  - Chaque note démarre à startTime, durée = noteDuration, startTime += noteDuration
+- playMetronome(bpm, beats) : clics rythmiques
+  - Premier temps = 1000 Hz, autres = 800 Hz, type = square
+
+============================================================
+9. COMPOSANTS REACT
+============================================================
+
+Fichier : src/components/Scales.tsx
+- Sélecteurs : tonique (A-G#), octave (1-8), système (tempéré/pythagoricien), type de gamme
+- Types de gammes : Majeure, Mineure naturelle, Mineure harmonique, Mineure mélodique,
+  Pentatonique majeure, Blues
+- Tableau affichant : note, fréquence (Hz), intervalle, demi-tons
+- Bouton "Écouter la gamme"
+
+Fichier : src/components/Intervals.tsx
+- Sélecteurs : note1 + octave, note2 + octave, système
+- Affichage : nom de l'intervalle, demi-tons, fréquences des 2 notes, battements (bps)
+- Bouton "Écouter l'intervalle" (2 notes simultanées)
+- Bouton "Écouter battements" (métronome au BPM = battements/seconde)
+- Graphique Recharts : BarChart des harmoniques des 2 notes
+
+Fichier : src/components/Comparison.tsx
+- Sélecteurs : tonique + octave
+- Tableau comparatif tempéré vs pythagoricien :
+  note, fréquence tempérée, fréquence pythagoricienne, différence en cents
+- Cents = 1200 * log2(freq_pythag / freq_temp)
+- 2 boutons pour écouter chaque version
+
+============================================================
+10. APP.TSX + STYLES
+============================================================
+
+Fichier : src/App.tsx
+- Navigation par onglets : Gammes | Intervalles | Comparaison
+- useState pour l'onglet actif
+- Rendu conditionnel du composant correspondant
+
+Fichier : src/App.css
+- Layout centré (max-width: 900px)
+- Styles pour : header, nav (onglets), controls, table, interval-info, chart
+
+============================================================
+11. CORRECTIONS ET BUILD
+============================================================
+
+Erreurs TypeScript corrigées :
+1. Comparison.tsx : import inutilisé de IntonationSystem -> supprimé
+2. Intervals.tsx : variable chartData inutilisée -> supprimée
+
+$ bun run build
+  -> tsc -b && vite build
+  -> Build réussi (240ms)
+  -> dist/index.html, dist/assets/index-*.css, dist/assets/index-*.js
+
+============================================================
+12. STRUCTURE FINALE DU PROJET
+============================================================
+
+intonation/
+├── .git/
+├── .gitignore
+├── README.md
+├── eslint.config.js
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── bun.lockb
+├── node_modules/
+├── public/
+├── dist/                       (build de production)
+└── src/
+    ├── App.tsx                 (navigation par onglets)
+    ├── App.css                 (styles)
+    ├── main.tsx                (point d'entrée)
+    ├── index.css               (styles globaux)
+    ├── vite-env.d.ts
+    ├── theory/
+    │   ├── constants.ts        (notes, ratios, types)
+    │   └── index.ts            (calculs musicaux)
+    ├── audio/
+    │   └── index.ts            (Web Audio API)
+    ├── components/
+    │   ├── Scales.tsx          (onglet Gammes)
+    │   ├── Intervals.tsx       (onglet Intervalles)
+    │   └── Comparison.tsx      (onglet Comparaison)
+    └── parsers/                (réservé MuseScore)
+
+============================================================
+13. COMMANDES UTILES
+============================================================
+
+Démarrer le serveur de dev :   bun dev
+Build de production :          bun run build
+Lint :                         bun run lint
+Type check :                   bun run tsc -b

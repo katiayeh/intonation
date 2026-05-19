@@ -1,19 +1,75 @@
-# intonation
-Intonation : pythagorean, tempered ...
+# React + TypeScript + Vite
 
-Something to understand intonation Can play tempered intonation For each key, can play pythagorean Can play them next to each other For 2 notes, can calculate the frequence of beats for different systems (ex : an augmented fourth has 2bpm, a diminished fifth 1bpm) a) in tempered b) pythagorean c) other intonations beats T = 2pi /(\omega1 - \omega2) 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-TODO table of frequences for a) tempered b) pythagorean A c) pythagorean A# ...
-1) Scales
-User select a tone, a system
-Plays the fifth and the scale
+Currently, two official plugins are available:
 
-3) Intervals
-User can select the first tone from A to Bb, the second, and the octave of each
-Graphs : show frequences of harmonics in the spectrum with 2 colors for the 2 tones
-Show the beats bps
-Play the beats as a metronome
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
+## React Compiler
 
-Analysis of chords from a musescore file
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+TODO 
+choisir 2 fréquences quelconques du spectre des 2 notes et calculer leur battement
