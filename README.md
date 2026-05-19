@@ -73,3 +73,7 @@ export default defineConfig([
 ```
 TODO 
 choisir 2 fréquences quelconques du spectre des 2 notes et calculer leur battement
+
+les battements des intervalles ne sont pas correctes
+
+changer la langue
