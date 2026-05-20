@@ -1,3 +1,11 @@
+# Purpose
+
+This project aims at understanding the difference between Pythagorean and tempered intonation.
+
+"Gammes" tab : The user can choose either system and play the scale starting from a tonic of choice.
+
+"Comparaison" tab : The user can play simultaneously both tones in both intonation systems.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
