@@ -85,3 +85,7 @@ choisir 2 fréquences quelconques du spectre des 2 notes et calculer leur battem
 les battements des intervalles ne sont pas corrects
 
 changer la langue
+
+proposer d'écouter la quinte pure et la tierce pure
+
+page méthodologie
