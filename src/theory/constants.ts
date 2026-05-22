@@ -8,6 +8,7 @@ export const A4_FREQUENCY = 440;
 
 function buildPythagoreanRatios(): Record<number, number> {
   const ratios: Record<number, number> = {};
+  // be in the right octave
   for (let n = 0; n <= 6; n++) {
     const semitones = (n * 7) % 12;
     let ratio = Math.pow(3 / 2, n);

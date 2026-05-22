@@ -147,4 +147,43 @@ section {
   h2 {
     margin-bottom: 16px;
   }
+
+  h3 {
+    margin: 24px 0 12px;
+  }
+}
+
+.definition {
+  padding: 16px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  h4 {
+    margin: 0 0 8px;
+    color: var(--text-h, #08060d);
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .definition {
+    background: var(--code-bg, #1f2028);
+  }
+}
+
+.references {
+  text-align: left;
+  padding-left: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+
+  a {
+    color: var(--accent, #aa3bff);
+  }
 }

@@ -1,47 +1,50 @@
 import { useState } from 'react';
 import { NOTE_NAMES, type NoteName } from '../theory/constants';
-import { getScale, INTERVAL_NAMES, getFrequency, noteToMidi } from '../theory';
+import { getScale, getFrequency, noteToMidi } from '../theory';
 import { playScale, playTwoFrequencies, playFrequency } from '../audio';
+import { useI18n } from '../i18n/hooks';
+import type { TranslationKey } from '../i18n/translations';
 
-const SCALE_PATTERNS: Record<string, number[]> = {
-  'Majeure': [2, 2, 1, 2, 2, 2, 1],
-  'Mineure naturelle': [2, 1, 2, 2, 1, 2, 2],
-  'Mineure harmonique': [2, 1, 2, 2, 1, 3, 1],
-  'Mineure mélodique': [2, 1, 2, 2, 2, 2, 1],
-  'Pentatonique majeure': [2, 2, 3, 2, 3],
-  'Blues': [3, 2, 1, 1, 3, 2],
+const SCALE_KEYS: Record<string, { pattern: number[]; key: TranslationKey }> = {
+  'Majeure': { pattern: [2, 2, 1, 2, 2, 2, 1], key: 'scaleMajor' },
+  'Mineure naturelle': { pattern: [2, 1, 2, 2, 1, 2, 2], key: 'scaleNaturalMinor' },
+  'Mineure harmonique': { pattern: [2, 1, 2, 2, 1, 3, 1], key: 'scaleHarmonicMinor' },
+  'Mineure mélodique': { pattern: [2, 1, 2, 2, 2, 2, 1], key: 'scaleMelodicMinor' },
+  'Pentatonique majeure': { pattern: [2, 2, 3, 2, 3], key: 'scalePentatonicMajor' },
+  'Blues': { pattern: [3, 2, 1, 1, 3, 2], key: 'scaleBlues' },
 };
 
 const INTERVAL_ROWS = [
-  { label: 'Tierce mineure', semitones: 3 },
-  { label: 'Tierce majeure', semitones: 4 },
-  { label: 'Quarte juste', semitones: 5 },
-  { label: 'Quinte juste', semitones: 7 },
+  { key: 'intervalMinorThird' as TranslationKey, semitones: 3 },
+  { key: 'intervalMajorThird' as TranslationKey, semitones: 4 },
+  { key: 'intervalPerfectFourth' as TranslationKey, semitones: 5 },
+  { key: 'intervalPerfectFifth' as TranslationKey, semitones: 7 },
 ];
 
 export function Scales() {
   const [rootName, setRootName] = useState<NoteName>('C');
   const [rootOctave, setRootOctave] = useState(4);
   const [patternName, setPatternName] = useState('Majeure');
+  const { t, tInterval } = useI18n();
 
-  const pattern = SCALE_PATTERNS[patternName];
+  const pattern = SCALE_KEYS[patternName].pattern;
   const tempered = getScale(rootName, rootOctave, 'tempered', pattern);
   const pythagorean = getScale(rootName, rootOctave, 'pythagorean', pattern);
 
   return (
     <section className="scales">
-      <h2>Gammes</h2>
+      <h2>{t('scalesTitle')}</h2>
 
       <div className="controls">
         <label>
-          Tonique :
+          {t('root')}
           <select value={rootName} onChange={(e) => setRootName(e.target.value as NoteName)}>
             {NOTE_NAMES.map((n) => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
 
         <label>
-          Octave :
+          {t('octave')}
           <input
             type="number"
             min={1} max={8}
@@ -51,10 +54,10 @@ export function Scales() {
         </label>
 
         <label>
-          Gamme :
+          {t('scale')}
           <select value={patternName} onChange={(e) => setPatternName(e.target.value)}>
-            {Object.keys(SCALE_PATTERNS).map((name) => (
-              <option key={name} value={name}>{name}</option>
+            {Object.keys(SCALE_KEYS).map((name) => (
+              <option key={name} value={name}>{t(SCALE_KEYS[name].key)}</option>
             ))}
           </select>
         </label>
@@ -62,14 +65,14 @@ export function Scales() {
 
       <div className="scale-columns">
         <div className="scale-column">
-          <h3>Tempéré</h3>
+          <h3>{t('tempered')}</h3>
           <table>
             <thead>
               <tr>
-                <th>Note</th>
-                <th>Fréquence (Hz)</th>
-                <th>Intervalle</th>
-                <th>Demi-tons</th>
+                <th>{t('thNote')}</th>
+                <th>{t('thFrequencyHz')}</th>
+                <th>{t('thInterval')}</th>
+                <th>{t('thSemitones')}</th>
               </tr>
             </thead>
             <tbody>
@@ -77,26 +80,26 @@ export function Scales() {
                 <tr key={i}>
                   <td>{note.name}{note.octave}</td>
                   <td>{note.frequency.toFixed(2)}</td>
-                  <td>{INTERVAL_NAMES[note.semitonesFromRoot] ?? '—'}</td>
+                  <td>{tInterval(note.semitonesFromRoot)}</td>
                   <td>{note.semitonesFromRoot}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <button onClick={() => playScale(tempered.map((n) => n.frequency))}>
-            ▶ Écouter la gamme
+            {t('listenScale')}
           </button>
         </div>
 
         <div className="scale-column">
-          <h3>Pythagoricien</h3>
+          <h3>{t('pythagorean')}</h3>
           <table>
             <thead>
               <tr>
-                <th>Note</th>
-                <th>Fréquence (Hz)</th>
-                <th>Intervalle</th>
-                <th>Demi-tons</th>
+                <th>{t('thNote')}</th>
+                <th>{t('thFrequencyHz')}</th>
+                <th>{t('thInterval')}</th>
+                <th>{t('thSemitones')}</th>
               </tr>
             </thead>
             <tbody>
@@ -104,34 +107,34 @@ export function Scales() {
                 <tr key={i}>
                   <td>{note.name}{note.octave}</td>
                   <td>{note.frequency.toFixed(2)}</td>
-                  <td>{INTERVAL_NAMES[note.semitonesFromRoot] ?? '—'}</td>
+                  <td>{tInterval(note.semitonesFromRoot)}</td>
                   <td>{note.semitonesFromRoot}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <button onClick={() => playScale(pythagorean.map((n) => n.frequency))}>
-            ▶ Écouter la gamme
+            {t('listenScale')}
           </button>
         </div>
       </div>
 
-      <h3>Intervalles</h3>
+      <h3>{t('intervals')}</h3>
       <table>
         <thead>
           <tr>
-            <th>Intervalle</th>
-            <th>Tempéré (Hz)</th>
-            <th>Pythagoricien (Hz)</th>
-            <th>Battement tempéré (Hz)</th>
-            <th>Période (s)</th>
-            <th>Battement pythagoricien (Hz)</th>
-            <th>Période (s)</th>
-            <th>Écouter</th>
+            <th>{t('thInterval')}</th>
+            <th>{t('thTemperedHz')}</th>
+            <th>{t('thPythagoreanHz')}</th>
+            <th>{t('thBeatTempered')}</th>
+            <th>{t('thPeriod')}</th>
+            <th>{t('thBeatPythagorean')}</th>
+            <th>{t('thPeriod')}</th>
+            <th>{t('thListen')}</th>
           </tr>
         </thead>
         <tbody>
-          {INTERVAL_ROWS.map(({ label, semitones }) => {
+          {INTERVAL_ROWS.map(({ key, semitones }) => {
             const noteMidi = noteToMidi(rootName, rootOctave) + semitones;
             const noteIndex = (NOTE_NAMES.indexOf(rootName) + semitones) % 12;
             const noteName = NOTE_NAMES[noteIndex];
@@ -149,7 +152,7 @@ export function Scales() {
 
             return (
               <tr key={semitones}>
-                <td>{label}</td>
+                <td>{t(key)}</td>
                 <td>
                   <button className="inline-play" onClick={() => playFrequency(freqT)}>
                     {freqT.toFixed(2)}

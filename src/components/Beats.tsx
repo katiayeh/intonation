@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { playFrequency, playTwoFrequencies } from '../audio';
+import { useI18n } from '../i18n/hooks';
 
 export function Beats() {
   const [freq1, setFreq1] = useState(440);
   const [freq2, setFreq2] = useState(442);
+  const { t } = useI18n();
 
   const beatFreq = Math.abs(freq2 - freq1);
 
   return (
     <section className="beats">
-      <h2>Battements</h2>
+      <h2>{t('beatsTitle')}</h2>
 
       <div className="controls">
         <label>
-          F1 (Hz) :
+          {t('f1Hz')}
           <input
             type="number"
             min={20} max={20000}
@@ -23,7 +25,7 @@ export function Beats() {
         </label>
 
         <label>
-          F2 (Hz) :
+          {t('f2Hz')}
           <input
             type="number"
             min={20} max={20000}
@@ -40,10 +42,10 @@ export function Beats() {
       <table>
         <thead>
           <tr>
-            <th>F1 (Hz)</th>
-            <th>F2 (Hz)</th>
-            <th>Battement (Hz)</th>
-            <th>Période (s)</th>
+            <th>{t('thF1Hz')}</th>
+            <th>{t('thF2Hz')}</th>
+            <th>{t('thBeatHz')}</th>
+            <th>{t('thPeriod')}</th>
           </tr>
         </thead>
         <tbody>
