@@ -7,6 +7,7 @@ const translations = {
     tabBeats: 'Battements',
     tabMethodology: 'Méthodologie',
     tabOvertones: 'Harmoniques',
+    tabHome: 'Accueil',
 
     scalesTitle: 'Gammes',
     root: 'Tonique :',
@@ -75,6 +76,7 @@ const translations = {
     thFrequencyHz: 'Fréquence (Hz)',
     fundamental: 'Fondamentale',
     overtone: 'Harmonique',
+    undertone: 'sous-harmonique',
 
     intervalNames: {
       1: 'Seconde mineure',
@@ -90,6 +92,8 @@ const translations = {
       11: 'Septième majeure',
       12: 'Octave',
     } as Record<number, string>,
+    homeTitle:'Accueil',
+    homeText: " Le but du projet est de comparer deux systèmes de justesse, d'explorer la physique la physique des battements, harmoniques et sous-harmoniques. Disclaimer : ce site est en cours de construction et contient potentiellement des erreurs. ",
   },
   en: {
     tabScales: 'Scales',
@@ -97,6 +101,7 @@ const translations = {
     tabBeats: 'Beats',
     tabMethodology: 'Methodology',
     tabOvertones: 'Overtones',
+    tabHome:'Home',
 
     scalesTitle: 'Scales',
     root: 'Root :',
@@ -164,6 +169,7 @@ const translations = {
     thFrequencyHz: 'Frequency (Hz)',
     fundamental: 'Fundamental',
     overtone: 'Harmonic',
+    undertone:'undertone',
 
     intervalNames: {
       0: 'Unison',
@@ -180,6 +186,9 @@ const translations = {
       11: 'Major seventh',
       12: 'Octave',
     } as Record<number, string>,
+
+    homeTitle:'Home',
+    homeText:'The purpose of this website is to compare two systems of intonation : tempered and pythagorean, to explore the physics of beats, overtones and undertones.',
   },
 } as const;
 

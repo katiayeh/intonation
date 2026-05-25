@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { playFrequency, playTwoFrequencies } from '../audio';
+import { playFrequency, playTwoFrequencies, playMetronome } from '../audio';
 import { useI18n } from '../i18n/hooks';
 
 export function Beats() {
   const [freq1, setFreq1] = useState(440);
   const [freq2, setFreq2] = useState(442);
   const { t } = useI18n();
+  const [metronomeOn, setMetronomeOn] = useState(false);
 
   const beatFreq = Math.abs(freq2 - freq1);
 
@@ -37,6 +38,7 @@ export function Beats() {
         <button onClick={() => playFrequency(freq1)}>▶ F1</button>
         <button onClick={() => playFrequency(freq2)}>▶ F2</button>
         <button onClick={() => playTwoFrequencies(freq1, freq2)}>▶ F1 + F2</button>
+        <button disabled={beatFreq === 0} onClick={() => playMetronome(beatFreq * 60)}>🔔 Métronome</button>
       </div>
 
       <table>
@@ -57,6 +59,8 @@ export function Beats() {
           </tr>
         </tbody>
       </table>
+
+      
     </section>
   );
 }

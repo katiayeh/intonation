@@ -118,6 +118,8 @@ export function Overtones() {
   const overtones1 = useMemo(() => getOvertones(freq1, NUM_OVERTONES), [freq1]);
   const overtones2 = useMemo(() => getOvertones(freq2, NUM_OVERTONES), [freq2]);
 
+  const beatFreq = Math.abs(freq2 - freq1);
+
   return (
     <section className="overtones">
       <h2>{t('overtonesTitle')}</h2>
@@ -183,6 +185,32 @@ export function Overtones() {
               </tr>
             );
           })}
+        </tbody>
+      </table>
+      <h2>{t('undertone')}</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>{t('thF1Hz')}</th>
+            <th>{t('thNote')}</th>
+            <th>{t('thF2Hz')}</th>
+            <th>{t('thNote')}</th>
+            <th>{t('undertone')}</th>
+            <th>{t('thNote')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{freq1.toFixed(2)}</td>
+            <td>{freqToNoteLabel(freq1)}</td>
+
+            <td>{freq2.toFixed(2)}</td>
+            <td>{freqToNoteLabel(freq2)}</td>
+
+            <td>{beatFreq.toFixed(2)}</td>
+            <td>{freqToNoteLabel(beatFreq)}</td>
+          </tr>
         </tbody>
       </table>
     </section>
