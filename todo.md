@@ -5,6 +5,8 @@ graph des harmoniques d'une note pour expliquer les battements
 
 recalculer pythagoricien pas par rapport à C 261.63
 
+vérifier les numéros d'harmoniques
+
 
 
 page méthodologie, 

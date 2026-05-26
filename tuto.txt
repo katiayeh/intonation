@@ -223,3 +223,16 @@ Comment ça marche :
 1. npm run deploy crée une branche gh-pages contenant uniquement les fichiers compilés (HTML, CSS, JS) du dossier dist/.
 2. En allant dans Settings → Pages → Source → gh-pages, tu dis à GitHub : "Utilise le contenu de la branche gh-pages pour servir un site web".
 3. GitHub publie alors automatiquement ces fichiers à l'adresse https://katiayeh.github.io/intonation.
+
+Web Audio API est une interface native du navigateur qui permet de générer et manipuler du son directement en JavaScript, sans plugin ni fichier audio.
+Dans ce projet, elle est utilisée pour créer des oscillateurs (OscillatorNode) qui produisent des fréquences pures (ex: 440 Hz = La), permettant d'écouter les notes, gammes et battements.
+C'est ce qui remplace un fichier .mp3 — le son est calculé et joué en temps réel par le navigateur.
+
+npm = package manager for JS programming language
+
+Quand tu lances bun dev = npm run dev:
+1. Bun lit le script "dev" dans package.json → "vite"
+2. Il lance Vite directement avec son propre runtime (plus rapide que Node)
+3. Le serveur de dev démarre sur localhost:5173
+C'est exactement la même chose que npm run dev — même script, même Vite, même résultat. La seule différence est que Bun démarre légèrement plus vite.
+npm interprete Node.js (runtime = environnement d'execution : logiciel responsable de l'exécution des programmes informatiques écrits dans un langage de programmation donné.)
