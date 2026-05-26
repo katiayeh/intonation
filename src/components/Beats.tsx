@@ -6,8 +6,6 @@ export function Beats() {
   const [freq1, setFreq1] = useState(440);
   const [freq2, setFreq2] = useState(442);
   const { t } = useI18n();
-  const [metronomeOn, setMetronomeOn] = useState(false);
-
   const beatFreq = Math.abs(freq2 - freq1);
 
   return (

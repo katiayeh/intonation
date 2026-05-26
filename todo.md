@@ -1,14 +1,20 @@
 TODO 
 
 les battements des intervalles ne sont pas corrects : quelles harmoniques choisir ?
-
-proposer d'écouter la quinte pure et la tierce pure
-
-page méthodologie, graphe du cycle des quintes pour expliquer le calcul des fréquences
-
-dispo sur la page github
-
 graph des harmoniques d'une note pour expliquer les battements
+
+recalculer pythagoricien pas par rapport à C 261.63
+
+
+
+page méthodologie, 
+- graphe du cycle des quintes pour expliquer le calcul des fréquences pythagoricien
+- formule 2**1/12 tempéré
+- definition cents
+- démonstration formule des battements
+- dans battements, dans le tableau : proposer d'écouter la quinte pure et la tierce pure
+
+
 
 nettoyage des fonctions non utilisées
 
@@ -25,14 +31,3 @@ pouvoir changer la fondamentale
 update readme, présentation des différents onglets
 
 just tempered pythagorean : recalculate pythagorean on just ?
-
-. Installer le paquet : npm install --save-dev gh-pages
-2. Ajouter homepage dans package.json :
-"homepage": "https://<username>.github.io/<repo-name>"
-3. Ajouter les scripts dans package.json :
-"predeploy": "npm run build",
-"deploy": "gh-pages -d dist"
-4. Configurer vite.config.ts — ajouter base: '/<repo-name>/'
-5. Lancer : npm run deploy
-6. Sur GitHub → repo → Settings → Pages → Source : choisir la branche gh-pages.
-Le site sera accessible à https://<username>.github.io/<repo-name>.

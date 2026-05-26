@@ -1,81 +1,78 @@
-# Purpose
+# Intonation
 
-This project aims at understanding the difference between Pythagorean and tempered intonation.
+A web application to explore and compare Pythagorean and tempered intonation systems through interactive visualizations and audio playback.
 
-"Gammes" tab : The user can choose either system and play the scale starting from a tonic of choice.
+## Features
 
-"Comparaison" tab : The user can play simultaneously both tones in both intonation systems.
+- **Scales** — Choose a tonic, octave and scale type, then listen to it in either tempered or Pythagorean intonation.
+- **Comparison** — Play both systems simultaneously to hear the difference in pitch for each note.
+- **Beats** — Adjust two frequencies and hear the resulting beat phenomenon.
+- **Overtones** — Visualize and listen to harmonics and sub-harmonics.
+- **Methodology** — Read definitions and references about the physics behind intonation.
 
-# React + TypeScript + Vite
+## Tech Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [React](https://react.dev) 19 + [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vite.dev) 8
+- [Recharts](https://recharts.org) for charts
+- Web Audio API for sound playback
+- i18n (French / English)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started (Local)
 
-## React Compiler
+### Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [Node.js](https://nodejs.org) **18+** (recommended: 20.x)
+- npm (comes with Node.js)
 
-## Expanding the ESLint configuration
+### Steps
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# 1. Clone the repository
+git clone https://github.com/katiayeh/intonation.git
+cd intonation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# 2. Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 3. Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Available Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Command             | Description                        |
+|---------------------|------------------------------------|
+| `npm run dev`       | Start the dev server with HMR      |
+| `npm run build`     | Type-check and build for production|
+| `npm run lint`      | Run ESLint                         |
+| `npm run preview`   | Preview the production build       |
+| `npm run deploy`    | Build and deploy to GitHub Pages   |
+
+---
+
+## Recommended VS Code Plugins
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) — linting
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) — code formatting
+- [TypeScript Importer](https://marketplace.visualstudio.com/items?itemName=pmneo.tsimporter) — auto imports
+
+---
+
+## GitHub Pages
+
+The app is deployed via the `gh-pages` branch.
+
+1. Run `npm run deploy` — this builds the project and pushes the `dist/` folder to the `gh-pages` branch.
+2. Go to **GitHub → Repository → Settings → Pages → Source** and select the `gh-pages` branch.
+3. The site will be live at: `https://katiayeh.github.io/intonation`
+
+---
+
+## Disclaimer
+
+This project is a work in progress. It is incomplete and may contain errors. Use it as a learning and experimentation tool, not as a reference.

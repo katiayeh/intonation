@@ -201,3 +201,25 @@ Démarrer le serveur de dev :   bun dev
 Build de production :          bun run build
 Lint :                         bun run lint
 Type check :                   bun run tsc -b
+
+
+. Installer le paquet : npm install --save-dev gh-pages
+2. Ajouter homepage dans package.json :
+"homepage": "https://<username>.github.io/<repo-name>"
+3. Ajouter les scripts dans package.json :
+"predeploy": "npm run build",
+"deploy": "gh-pages -d dist"
+4. Configurer vite.config.ts — ajouter base: '/<repo-name>/'
+5. Lancer : npm run deploy
+6. Sur GitHub → repo → Settings → Pages → Source : choisir la branche gh-pages.
+Le site sera accessible à https://<username>.github.io/<repo-name>.
+
+
+gh-pages 
+Calling this function will create a temporary clone of the current repository, create a gh-pages branch if one doesn't already exist, copy over all files from the base path, or only those that match patterns from the optional src configuration, commit all changes, and push to the origin remote.
+
+GitHub Pages est un service gratuit d'hébergement de sites statiques intégré à GitHub.GitHub Pages est un service gratuit d'hébergement de sites statiques intégré à GitHub.
+Comment ça marche :
+1. npm run deploy crée une branche gh-pages contenant uniquement les fichiers compilés (HTML, CSS, JS) du dossier dist/.
+2. En allant dans Settings → Pages → Source → gh-pages, tu dis à GitHub : "Utilise le contenu de la branche gh-pages pour servir un site web".
+3. GitHub publie alors automatiquement ces fichiers à l'adresse https://katiayeh.github.io/intonation.
