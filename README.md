@@ -67,9 +67,7 @@ The app will be available at `http://localhost:5173`.
 
 The app is deployed via the `gh-pages` branch.
 
-1. Run `npm run deploy` — this builds the project and pushes the `dist/` folder to the `gh-pages` branch.
-2. Go to **GitHub → Repository → Settings → Pages → Source** and select the `gh-pages` branch.
-3. The site will be live at: `https://katiayeh.github.io/intonation`
+The site will be live at: `https://katiayeh.github.io/intonation`
 
 ---
 
