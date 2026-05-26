@@ -91,7 +91,12 @@ const translations = {
       12: 'Octave',
     } as Record<number, string>,
     homeTitle:'Accueil',
-    homeText: " Le but du projet est de comparer deux systèmes de justesse, d'explorer la physique la physique des battements, harmoniques et sous-harmoniques. Disclaimer : ce site est en cours de construction et contient potentiellement des erreurs. ",
+    homeText: "Le but du projet est de comparer deux systèmes de justesse, d'explorer la physique des battements, harmoniques et sous-harmoniques. Disclaimer : ce site est en cours de construction et contient potentiellement des erreurs.",
+    homeFeatureScales: 'Choisissez une tonique, une octave et un type de gamme, puis écoutez-la en intonation tempérée ou pythagoricienne.',
+    homeFeatureComparison: 'Jouez les deux systèmes simultanément pour entendre la différence de hauteur de chaque note.',
+    homeFeatureBeats: 'Réglez deux fréquences et écoutez le phénomène de battement qui en résulte.',
+    homeFeatureOvertones: 'Visualisez et écoutez les harmoniques et les sous-harmoniques.',
+    homeFeatureMethodology: "Lisez les définitions et les références concernant la physique qui sous-tend l'intonation.",
   },
   en: {
     tabScales: 'Scales',
@@ -186,6 +191,11 @@ const translations = {
 
     homeTitle:'Home',
     homeText:'The purpose of this website is to compare two systems of intonation : tempered and pythagorean, to explore the physics of beats, overtones and undertones.',
+    homeFeatureScales: 'Choose a root, an octave and a scale type, then listen to it in tempered or pythagorean intonation.',
+    homeFeatureComparison: 'Play both systems simultaneously to hear the pitch difference of each note.',
+    homeFeatureBeats: 'Adjust two frequencies and listen to the resulting beat phenomenon.',
+    homeFeatureOvertones: 'Visualize and listen to overtones and undertones.',
+    homeFeatureMethodology: 'Read the definitions and references about the physics behind intonation.',
   },
 } as const;
 

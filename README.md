@@ -4,10 +4,10 @@ A web application to explore and compare Pythagorean and tempered intonation sys
 
 ## Features
 
-- **Scales** — Choose a tonic, octave and scale type, then listen to it in either tempered or Pythagorean intonation.
+- **Scales** — Choose a tonic, octave and scale type, then listen to it in either tempered or pythagorean intonation.
 - **Comparison** — Play both systems simultaneously to hear the difference in pitch for each note.
 - **Beats** — Adjust two frequencies and hear the resulting beat phenomenon.
-- **Overtones** — Visualize and listen to harmonics and sub-harmonics.
+- **Overtones** — Visualise and listen to harmonics and sub-harmonics.
 - **Methodology** — Read definitions and references about the physics behind intonation.
 
 ## Tech Stack
@@ -74,3 +74,13 @@ The site will be live at: `https://katiayeh.github.io/intonation`
 ## Disclaimer
 
 This project is a work in progress. It is incomplete and may contain errors. Use it as a learning and experimentation tool, not as a reference.
+
+
+# Version française
+
+- **Gammes** — Choisissez une tonique, une octave et un type de gamme, puis écoutez-la en intonation tempérée ou pythagoricienne.
+- **Comparaison** — Jouez les deux systèmes simultanément pour entendre la différence de hauteur de chaque note.
+- **Battements** — Réglez deux fréquences et écoutez le phénomène de battement qui en résulte.
+- **Harmoniques** — Visualisez et écoutez les harmoniques et les sous-harmoniques.
+- **Méthodologie** — Lisez les définitions et les références concernant la physique qui sous-tend l'intonation.
+
